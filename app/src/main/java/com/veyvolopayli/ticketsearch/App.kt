@@ -1,6 +1,9 @@
 package com.veyvolopayli.ticketsearch
 
 import android.app.Application
+import com.veyvolopayli.ticketsearch.di.dataModule
+import com.veyvolopayli.ticketsearch.di.domainModule
+import com.veyvolopayli.ticketsearch.di.presentationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin

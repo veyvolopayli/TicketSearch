@@ -51,6 +51,8 @@ dependencies {
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.koin.core)
     implementation(libs.koin.android)
+    implementation(libs.adapterdelegates4.kotlin.dsl)
+    implementation(libs.glide)
     implementation(project(":domain"))
     implementation(project(":common"))
 }

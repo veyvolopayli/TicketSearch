@@ -10,4 +10,5 @@
         android:name="com.veyvolopayli.presentation.main.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
+
 </navigation>

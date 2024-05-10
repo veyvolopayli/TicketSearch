@@ -8,4 +8,12 @@
     <string name="shorter">Shorter</string>
     <string name="profile">Profile</string>
     <string name="subscriptions">Subscriptions</string>
+    <string name="cheap_air_tickets_search">Поиск дешевых \n авиабилетов</string>
+    <string name="from_moscow">Откуда - Москва</string>
+    <string name="where_turkey">Куда - Турция</string>
+    <string name="search_icon">Иконка поиска</string>
+    <string name="fly_away_musically">Музыкально отлететь</string>
+    <string name="card_price_template">от 22 222 ₽</string>
+    <string name="title">Название</string>
+    <string name="town">Город</string>
 </resources>
