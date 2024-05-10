@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="local_exception_occurred">Произошла локальная ошибка.</string>
+    <string name="network_exception_occurred">Ошибка сети.</string>
+    <string name="try_again_later">Попробуйте еще раз позже.</string>
+    <string name="air_tickets">Авиабилеты</string>
+    <string name="hotels">Отели</string>
+    <string name="shorter">Короче</string>
+    <string name="profile">Профиль</string>
+    <string name="subscriptions">Подписки</string>
+</resources>

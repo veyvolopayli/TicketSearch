@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="local_exception_occurred">A local error has occurred.</string>
+    <string name="network_exception_occurred">A network error has occurred.</string>
+    <string name="try_again_later">Try again later.</string>
+    <string name="air_tickets">Air tickets</string>
+    <string name="hotels">Hotels</string>
+    <string name="shorter">Shorter</string>
+    <string name="profile">Profile</string>
+    <string name="subscriptions">Subscriptions</string>
+</resources>
