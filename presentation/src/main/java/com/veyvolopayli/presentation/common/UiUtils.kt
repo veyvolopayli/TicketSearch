@@ -2,14 +2,18 @@ package com.veyvolopayli.presentation.common
 
 import android.text.InputFilter
 import android.text.Spanned
+import android.view.MotionEvent
+import android.widget.EditText
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.veyvolopayli.presentation.R
 import java.text.DecimalFormat
 
-fun Int.toUiPriceFrom(): String {
+fun Int.toUiPriceFrom(): String = "от ${this.toUiPrice()}"
+
+fun Int.toUiPrice(): String {
     val formatter = DecimalFormat("#,###")
-    return "от ${ formatter.format(this) } ₽"
+    return "${ formatter.format(this) } ₽"
 }
 
 fun ShapeableImageView.roundOffImageCornersToDefault(): ShapeableImageView {
@@ -20,7 +24,23 @@ fun ShapeableImageView.roundOffImageCornersToDefault(): ShapeableImageView {
     return this
 }
 
-object CyrillicInputFilter: InputFilter {
+fun EditText.onRightDrawableClick(onClick: (et: EditText) -> Unit) {
+    val endDrawable = compoundDrawablesRelative[2] ?: return
+    val iconWidth = endDrawable.intrinsicWidth
+    println(iconWidth)
+    setOnTouchListener { v, event ->
+        if (event.action == MotionEvent.ACTION_UP) {
+            if (event.x > v.width - iconWidth) {
+                performClick()
+                onClick.invoke(this)
+                return@setOnTouchListener true
+            }
+        }
+        false
+    }
+}
+
+class CyrillicInputFilter: InputFilter {
     override fun filter(
         source: CharSequence?,
         start: Int,
@@ -28,9 +48,8 @@ object CyrillicInputFilter: InputFilter {
         dest: Spanned?,
         dstart: Int,
         dend: Int
-    ): CharSequence {
-        return source?.subSequence(start, end)?.filter {
-            Character.UnicodeBlock.of(it) == Character.UnicodeBlock.CYRILLIC
-        }?.toList()?.joinToString("") ?: ""
+    ): CharSequence? {
+        source ?: return null
+        return if (source.matches(Regex("[a-zA-Z ]+"))) source else null
     }
 }

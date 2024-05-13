@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    tools:context=".search_tickets_screen.SearchTicketsDialogFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <View
+                android:layout_width="38dp"
+                android:layout_height="5dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/background_10_dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="24dp"
+                android:background="@drawable/search_card_background"
+                android:backgroundTint="@color/grey_3"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <EditText
+                    android:id="@+id/start_destination_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:drawablePadding="8dp"
+                    android:hint="@string/from_moscow"
+                    android:imeOptions="actionNext"
+                    android:importantForAutofill="no"
+                    android:inputType="text|textCapSentences"
+                    android:textAppearance="@style/ButtonText1"
+                    android:digits="@string/cyrillic_letters"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/grey_6"
+                    android:drawableStart="@drawable/ic_airplane" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="8dp"
+                    android:background="@color/grey_4" />
+
+                <EditText
+                    android:id="@+id/end_destination_et"
+                    style="@style/ButtonText1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:drawablePadding="8dp"
+                    android:hint="@string/where_turkey"
+                    android:imeOptions="actionDone"
+                    android:digits="@string/cyrillic_letters"
+                    android:importantForAutofill="no"
+                    android:inputType="text|textCapSentences"
+                    android:textAppearance="@style/ButtonText1"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/grey_6"
+                    android:drawableStart="@drawable/ic_search"
+                    android:drawableEnd="@drawable/ic_cross"
+                    app:drawableTint="@color/white" />
+
+            </LinearLayout>
+
+            <include
+                android:id="@+id/suggestions_layout"
+                layout="@layout/layout_suggestions" />
+
+            <include
+                android:id="@+id/popular_suggestions_layout"
+                layout="@layout/layout_popular_suggestions" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

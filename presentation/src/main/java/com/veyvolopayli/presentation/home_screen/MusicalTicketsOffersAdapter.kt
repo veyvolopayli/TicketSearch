@@ -12,7 +12,7 @@ import com.veyvolopayli.presentation.databinding.ItemMusicalOfferBinding
 
 class MusicalTicketsOffersAdapter : RecyclerView.Adapter<MusicalTicketsOffersAdapter.ViewHolder>() {
 
-    private val offers = mutableListOf<MusicalTicketOffer>()
+    private var offers = listOf<MusicalTicketOffer>()
 
     class ViewHolder(binding: ItemMusicalOfferBinding): RecyclerView.ViewHolder(binding.root) {
         val image = binding.image
@@ -38,7 +38,7 @@ class MusicalTicketsOffersAdapter : RecyclerView.Adapter<MusicalTicketsOffersAda
             else -> R.drawable.search_card_background
         }
         with(holder) {
-            Glide.with(image).load(imageResourceId).into(image.roundOffImageCornersToDefault())
+            Glide.with(title).load(imageResourceId).into(image.roundOffImageCornersToDefault())
             title.text = currentOffer.title
             town.text = currentOffer.town
             price.text = currentOffer.price.value.toUiPriceFrom()
@@ -46,10 +46,7 @@ class MusicalTicketsOffersAdapter : RecyclerView.Adapter<MusicalTicketsOffersAda
     }
 
     fun setOffers(newOffers: List<MusicalTicketOffer>) {
-        offers.apply {
-            clear()
-            addAll(newOffers)
-        }
+        offers = newOffers
     }
 
 }

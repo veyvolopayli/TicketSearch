@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/air_tickets"
+        android:id="@+id/air_tickets_tab"
         android:icon="@drawable/ic_air_tickets_menu"
         android:title="@string/air_tickets" />
     <item
-        android:id="@+id/hotels"
+        android:id="@+id/hotels_tab"
         android:icon="@drawable/ic_hotels"
         android:title="@string/hotels" />
     <item
-        android:id="@+id/shorter"
+        android:id="@+id/shorter_tab"
         android:icon="@drawable/ic_point"
         android:title="@string/shorter" />
     <item
-        android:id="@+id/subscriptions"
+        android:id="@+id/subscriptions_tab"
         android:icon="@drawable/ic_subscriptions"
         android:title="@string/subscriptions" />
     <item
-        android:id="@+id/profile"
+        android:id="@+id/profile_tab"
         android:icon="@drawable/ic_profile"
         android:title="@string/profile" />
 </menu>

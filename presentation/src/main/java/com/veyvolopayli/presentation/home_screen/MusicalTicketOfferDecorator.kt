@@ -1,4 +1,4 @@
-package com.veyvolopayli.presentation.common.recycler_item_decorators
+package com.veyvolopayli.presentation.home_screen
 
 import android.graphics.Rect
 import android.view.View

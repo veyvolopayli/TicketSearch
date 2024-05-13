@@ -1,9 +1,10 @@
-package com.veyvolopayli.presentation
+package com.veyvolopayli.presentation.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commitNow
 import androidx.navigation.fragment.NavHostFragment
+import com.veyvolopayli.presentation.R
 import com.veyvolopayli.presentation.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

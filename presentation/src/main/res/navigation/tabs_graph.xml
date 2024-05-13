@@ -2,6 +2,10 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/tabs_graph"
-    app:startDestination="@id/air_tickets">
-    <include app:graph="@navigation/air_tickets" />
+    app:startDestination="@id/air_tickets_tab">
+    <include app:graph="@navigation/air_tickets_tab" />
+    <include app:graph="@navigation/hotels_tab" />
+    <include app:graph="@navigation/shorter_tab" />
+    <include app:graph="@navigation/subscriptions_tab" />
+    <include app:graph="@navigation/profile_tab" />
 </navigation>

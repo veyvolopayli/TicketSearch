@@ -16,4 +16,23 @@
     <string name="card_price_template">от 22 222 ₽</string>
     <string name="title">Название</string>
     <string name="town">Город</string>
+    <string name="difficult_route">Сложный маршрут</string>
+    <string name="anywhere">Куда угодно</string>
+    <string name="holidays">Выходные</string>
+    <string name="hot_tickets">Горячие билеты</string>
+    <string name="cyrillic_letters">АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ абвгдеёжзийклмнопрстуфхцчшщъыьэюя</string>
+    <string name="no_name_fragment">Безымянный фрагмент</string>
+    <string name="istanbul">Стамбул</string>
+    <string name="popular_route">Популярное направление</string>
+    <string name="sochi">Сочи</string>
+    <string name="phuket">Пхукет</string>
+    <string name="econom">эконом</string>
+    <string name="back">обратно</string>
+    <string name="date_template">24 фев, сб</string>
+    <string name="passenger_class_template">1,эконом</string>
+    <string name="filters">фильтры</string>
+    <string name="direct_flight">Прямые рейсы</string>
+    <string name="show_all">Показать все</string>
+    <string name="see_all_tickets">Посмотреть все билеты</string>
+    <string name="subscription_on_price">Подписка на цену</string>
 </resources>
