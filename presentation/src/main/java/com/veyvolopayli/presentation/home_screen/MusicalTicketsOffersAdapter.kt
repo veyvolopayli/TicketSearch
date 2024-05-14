@@ -2,10 +2,12 @@ package com.veyvolopayli.presentation.home_screen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.veyvolopayli.domain.model.musical_ticket_offer.MusicalTicketOffer
 import com.veyvolopayli.presentation.R
+import com.veyvolopayli.presentation.common.DiffUtilCallback
 import com.veyvolopayli.presentation.common.roundOffImageCornersToDefault
 import com.veyvolopayli.presentation.common.toUiPriceFrom
 import com.veyvolopayli.presentation.databinding.ItemMusicalOfferBinding
@@ -46,7 +48,12 @@ class MusicalTicketsOffersAdapter : RecyclerView.Adapter<MusicalTicketsOffersAda
     }
 
     fun setOffers(newOffers: List<MusicalTicketOffer>) {
+        val diffCallback = DiffUtilCallback(oldList = offers, newList = newOffers) { oldItem, newItem ->
+            oldItem.id == newItem.id
+        }
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         offers = newOffers
+        diffResult.dispatchUpdatesTo(this)
     }
 
 }

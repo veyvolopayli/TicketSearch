@@ -2,6 +2,8 @@ package com.veyvolopayli.presentation.search_tickets_screen
 
 import android.content.res.Resources
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.TextView
 import androidx.core.os.bundleOf
@@ -10,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.veyvolopayli.presentation.R
+import com.veyvolopayli.presentation.common.addCyrillicTextWatcherFilter
+import com.veyvolopayli.presentation.common.onDone
 import com.veyvolopayli.presentation.plug_screen.PlugFragment
 import com.veyvolopayli.presentation.common.onRightDrawableClick
 import com.veyvolopayli.presentation.databinding.FragmentSearchTicketsBinding
@@ -48,6 +52,9 @@ class SearchTicketsDialogFragment : BottomSheetDialogFragment(R.layout.fragment_
             }
         }
 
+        binding.startDestinationEt.addCyrillicTextWatcherFilter()
+        binding.endDestinationEt.addCyrillicTextWatcherFilter()
+
         binding.popularSuggestionsLayout.itemIstanbul.setOnClickListener {
             binding.endDestinationEt.setText(R.string.istanbul)
         }
@@ -61,8 +68,17 @@ class SearchTicketsDialogFragment : BottomSheetDialogFragment(R.layout.fragment_
         }
 
         binding.endDestinationEt.onRightDrawableClick { it.text.clear() }
-    }
 
+        binding.endDestinationEt.onDone {
+            val bundle = bundleOf(
+                "START_DESTINATION" to binding.startDestinationEt.text.toString().trim(),
+                "END_DESTINATION" to binding.endDestinationEt.text.toString().trim()
+            )
+            findNavController().navigate(
+                R.id.action_searchTicketsFragment_to_searchCountryChosenFragment, bundle
+            )
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

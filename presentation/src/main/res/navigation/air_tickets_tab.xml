@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/air_tickets_tab"
     app:startDestination="@id/homeFragment">
-
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.veyvolopayli.presentation.home_screen.HomeFragment"
@@ -22,10 +21,18 @@
         <action
             android:id="@+id/action_searchTicketsFragment_to_plugFragment"
             app:destination="@id/plugFragment" />
+        <action
+            android:id="@+id/action_searchTicketsFragment_to_searchCountryChosenFragment"
+            app:destination="@id/searchCountryChosenFragment" />
     </dialog>
     <fragment
         android:id="@+id/plugFragment"
         android:name="com.veyvolopayli.presentation.plug_screen.PlugFragment"
         android:label="fragment_plug"
         tools:layout="@layout/fragment_plug" />
+    <fragment
+        android:id="@+id/searchCountryChosenFragment"
+        android:name="com.veyvolopayli.presentation.search_country_chosen_screen.SearchCountryChosenFragment"
+        android:label="fragment_search_country_chosen"
+        tools:layout="@layout/fragment_search_country_chosen" />
 </navigation>

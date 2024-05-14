@@ -8,7 +8,11 @@ import org.koin.dsl.module
 val presentationModule = module {
 
     viewModel {
-        HomeViewModel(fetchMusicalTicketsOffersUseCase = get())
+        HomeViewModel(
+            fetchMusicalTicketsOffersUseCase = get(),
+            saveDepartureLocationUseCase = get(),
+            getDepartureLocationUseCase = get()
+        )
     }
 
     viewModel {

@@ -39,11 +39,11 @@
                     android:background="@android:color/transparent"
                     android:drawablePadding="8dp"
                     android:hint="@string/from_moscow"
+                    android:lines="1"
                     android:imeOptions="actionNext"
                     android:importantForAutofill="no"
                     android:inputType="text|textCapSentences"
                     android:textAppearance="@style/ButtonText1"
-                    android:digits="@string/cyrillic_letters"
                     android:textColor="@color/white"
                     android:textColorHint="@color/grey_6"
                     android:drawableStart="@drawable/ic_airplane" />
@@ -57,14 +57,13 @@
 
                 <EditText
                     android:id="@+id/end_destination_et"
-                    style="@style/ButtonText1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:drawablePadding="8dp"
                     android:hint="@string/where_turkey"
                     android:imeOptions="actionDone"
-                    android:digits="@string/cyrillic_letters"
+                    android:lines="1"
                     android:importantForAutofill="no"
                     android:inputType="text|textCapSentences"
                     android:textAppearance="@style/ButtonText1"

@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.veyvolopayli.presentation.R
+import com.veyvolopayli.presentation.common.addCyrillicTextWatcherFilter
 import com.veyvolopayli.presentation.databinding.FragmentHomeBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -22,17 +23,27 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val binding = FragmentHomeBinding.bind(view)
         this.binding = binding
 
+        vm.savedDepartureLocation.observe(viewLifecycleOwner) { savedLocation ->
+            binding.startDestinationEt.apply {
+                if (text.isNullOrEmpty()) {
+                    setText(savedLocation)
+                }
+            }
+        }
+
         vm.musicalOffersState.observe(viewLifecycleOwner) { state ->
-            when(state) {
+            when (state) {
                 is MusicalTicketsOffersState.Loading -> {
 
                 }
+
                 is MusicalTicketsOffersState.Success -> {
                     val offersAdapter = MusicalTicketsOffersAdapter().also {
                         it.setOffers(state.data.musicalTicketOffers)
                     }
                     binding.offersRv.setupRecyclerView(offersAdapter)
                 }
+
                 is MusicalTicketsOffersState.Error -> {
 
                 }
@@ -40,10 +51,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         binding.endDestinationTv.setOnClickListener {
-            val startDestinationText = binding.startDestinationEt.text?.toString()
+            val startDestinationText = binding.startDestinationEt.text.toString().trim()
+            vm.saveDepartureLocation(startDestinationText)
             val argBundle = bundleOf("START_DESTINATION" to startDestinationText)
-            findNavController().navigate(R.id.action_homeFragment_to_searchTicketsFragment, argBundle)
+            findNavController().navigate(
+                R.id.action_homeFragment_to_searchTicketsFragment,
+                argBundle
+            )
         }
+
+        binding.startDestinationEt.addCyrillicTextWatcherFilter()
     }
 
     private fun RecyclerView.setupRecyclerView(offersAdapter: MusicalTicketsOffersAdapter) {
@@ -52,10 +69,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         )
         addItemDecoration(
             MusicalTicketOfferDecorator(
-            resources.getDimensionPixelSize(R.dimen.musical_offers_items_space)
-        )
+                resources.getDimensionPixelSize(R.dimen.musical_offers_items_space)
+            )
         )
         adapter = offersAdapter
+    }
+
+    override fun onPause() {
+        super.onPause()
+//        val location = binding?.startDestinationEt?.text?.toString() ?: return
+//        vm.saveDepartureLocation(location)
     }
 
     override fun onDestroyView() {

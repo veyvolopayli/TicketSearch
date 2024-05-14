@@ -35,4 +35,9 @@
     <string name="show_all">Показать все</string>
     <string name="see_all_tickets">Посмотреть все билеты</string>
     <string name="subscription_on_price">Подписка на цену</string>
+    <string name="ural_airlines">Уральские авиалинии</string>
+    <string name="price_template">2 390 ₽</string>
+    <string name="prices_template">07:00 09:10 10:00 11:00 12:00 13:00 14:00 15:00 16:00 17:00</string>
+    <string name="error_occurred_on_data_loading">Произошла ошибка при загрузке данных</string>
+    <string name="passenger_count_and_class">%d,%s</string>
 </resources>

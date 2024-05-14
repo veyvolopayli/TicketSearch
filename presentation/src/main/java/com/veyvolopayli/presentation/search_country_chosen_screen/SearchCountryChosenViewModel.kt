@@ -3,12 +3,14 @@ package com.veyvolopayli.presentation.search_country_chosen_screen
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.veyvolopayli.common.RequestResult
 import com.veyvolopayli.domain.model.ticket_offer.TicketOffer
 import com.veyvolopayli.domain.model.ticket_offer.TicketsOffers
 import com.veyvolopayli.domain.usecases.FetchTicketsOffersUseCase
 import com.veyvolopayli.presentation.R
 import com.veyvolopayli.presentation.common.UiState
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import java.time.LocalDate
 
@@ -32,7 +34,7 @@ class SearchCountryChosenViewModel(
     private fun fetchTicketsOffers() {
         fetchTicketsOffersUseCase().onEach { requestResult ->
             _ticketsOffersState.value = requestResult.toUiState()
-        }
+        }.launchIn(viewModelScope)
     }
 
     fun setDepartureDate(date: LocalDate) {
