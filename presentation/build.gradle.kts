@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.androidx.navigation.safeargs)
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 android {
@@ -53,6 +55,7 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.adapterdelegates4.kotlin.dsl)
     implementation(libs.glide)
+    implementation(libs.kotlinx.serialization.core)
     implementation(project(":domain"))
     implementation(project(":common"))
 }

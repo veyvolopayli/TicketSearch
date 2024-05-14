@@ -34,5 +34,19 @@
         android:id="@+id/searchCountryChosenFragment"
         android:name="com.veyvolopayli.presentation.search_country_chosen_screen.SearchCountryChosenFragment"
         android:label="fragment_search_country_chosen"
-        tools:layout="@layout/fragment_search_country_chosen" />
+        tools:layout="@layout/fragment_search_country_chosen" >
+        <action
+            android:id="@+id/action_searchCountryChosenFragment_to_allTicketsFragment"
+            app:destination="@id/allTicketsFragment">
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/allTicketsFragment"
+        android:name="com.veyvolopayli.presentation.all_tickets_screen.AllTicketsFragment"
+        android:label="fragment_all_tickets"
+        tools:layout="@layout/fragment_all_tickets">
+        <argument
+            android:name="search_data"
+            app:argType="com.veyvolopayli.presentation.common.SearchData" />
+    </fragment>
 </navigation>

@@ -8,8 +8,9 @@ import java.time.LocalDateTime
 @Serializable
 data class ArrivalDto(
     @SerialName("airport") val airport: String,
-    @SerialName("date") val date: String,
-    @SerialName("town") val town: String
+    @Serializable(with = LocalDateTimeSerializer::class)
+    @SerialName("date") val date: LocalDateTime,
+    @SerialName("town") val town: String,
 )
 
 @Serializable
@@ -17,7 +18,7 @@ data class DepartureDto(
     @SerialName("airport") val airport: String,
     @Serializable(with = LocalDateTimeSerializer::class)
     @SerialName("date") val date: LocalDateTime,
-    @SerialName("town") val town: String
+    @SerialName("town") val town: String,
 )
 
 @Serializable

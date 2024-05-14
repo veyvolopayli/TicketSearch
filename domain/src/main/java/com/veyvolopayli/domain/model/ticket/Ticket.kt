@@ -4,7 +4,7 @@ import java.time.LocalDateTime
 
 data class Arrival(
     val airport: String,
-    val date: String,
+    val date: LocalDateTime,
     val town: String
 )
 

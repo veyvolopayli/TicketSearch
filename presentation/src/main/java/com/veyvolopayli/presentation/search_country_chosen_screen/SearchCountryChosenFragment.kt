@@ -5,13 +5,16 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.veyvolopayli.presentation.R
+import com.veyvolopayli.presentation.common.SearchData
 import com.veyvolopayli.presentation.common.UiState
 import com.veyvolopayli.presentation.common.formatShort
 import com.veyvolopayli.presentation.common.onRightDrawableClick
 import com.veyvolopayli.presentation.databinding.FragmentSearchCountryChosenBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.time.LocalDate
 import java.time.ZoneId
 import java.util.Calendar
 import java.util.Date
@@ -46,6 +49,15 @@ class SearchCountryChosenFragment() : Fragment(R.layout.fragment_search_country_
             }
             endDestinationEt.onRightDrawableClick {
                 it.text.clear()
+            }
+            seeAllTicketsBtn.setOnClickListener {
+                val searchData = SearchData(
+                    departureLocation = binding.startDestinationEt.text.toString().trim(),
+                    arrivalLocation = binding.endDestinationEt.text.toString().trim(),
+                    departureDate = viewModel.topMenuState.value?.departureDate ?: LocalDate.now(),
+                )
+                val action = SearchCountryChosenFragmentDirections.actionSearchCountryChosenFragmentToAllTicketsFragment(searchData)
+                findNavController().navigate(action)
             }
         }
 

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_8_dp"
+        android:backgroundTint="@color/grey_1"
+        android:layout_marginTop="8dp"
+        android:paddingStart="16dp"
+        android:paddingTop="21dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="23dp">
+
+        <TextView
+            android:id="@+id/price_tv"
+            style="@style/Title1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/price_template"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/circle_view"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/circle"
+            android:backgroundTint="@color/red"
+            app:layout_constraintBottom_toBottomOf="@id/departure_airport_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/departure_time_tv" />
+
+        <TextView
+            android:id="@+id/departure_time_tv"
+            style="@style/Title4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/time_template"
+            app:layout_constraintStart_toEndOf="@id/circle_view"
+            app:layout_constraintTop_toBottomOf="@id/price_tv" />
+
+        <TextView
+            android:id="@+id/departure_airport_tv"
+            style="@style/Title4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/airport_template"
+            android:textColor="@color/grey_6"
+            app:layout_constraintStart_toStartOf="@id/departure_time_tv"
+            app:layout_constraintTop_toBottomOf="@id/departure_time_tv" />
+
+        <View
+            android:id="@+id/dash_view"
+            android:layout_width="10dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="4dp"
+            android:background="@color/grey_6"
+            app:layout_constraintBottom_toBottomOf="@id/departure_time_tv"
+            app:layout_constraintStart_toEndOf="@+id/departure_time_tv"
+            app:layout_constraintTop_toTopOf="@+id/departure_time_tv" />
+
+        <TextView
+            android:id="@+id/arrival_time_tv"
+            style="@style/Title4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/time_template"
+            app:layout_constraintStart_toEndOf="@id/dash_view"
+            app:layout_constraintTop_toTopOf="@id/departure_time_tv" />
+
+        <TextView
+            android:id="@+id/arrival_airport_tv"
+            style="@style/Title4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/airport_template"
+            android:textColor="@color/grey_6"
+            app:layout_constraintStart_toStartOf="@id/arrival_time_tv"
+            app:layout_constraintTop_toBottomOf="@id/arrival_time_tv" />
+
+        <TextView
+            android:id="@+id/travel_time_tv"
+            style="@style/Text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/travel_time_template"
+            app:layout_constraintStart_toEndOf="@id/arrival_time_tv"
+            app:layout_constraintTop_toTopOf="@id/arrival_time_tv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/badge_tv"
+        style="@style/Title4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_50_dp"
+        android:backgroundTint="@color/blue"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="2dp"
+        android:text="@string/badge_template"
+        app:layout_constraintBottom_toTopOf="@id/price_tv"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</FrameLayout>
