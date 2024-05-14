@@ -2,12 +2,14 @@ package com.veyvolopayli.presentation.home_screen
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.veyvolopayli.presentation.R
+import com.veyvolopayli.presentation.common.UiState
 import com.veyvolopayli.presentation.common.addCyrillicTextWatcherFilter
 import com.veyvolopayli.presentation.databinding.FragmentHomeBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,6 +25,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val binding = FragmentHomeBinding.bind(view)
         this.binding = binding
 
+        val offersAdapter = MusicalTicketsOffersAdapter()
+        binding.offersRv.setupRecyclerView(offersAdapter)
+
         vm.savedDepartureLocation.observe(viewLifecycleOwner) { savedLocation ->
             binding.startDestinationEt.apply {
                 if (text.isNullOrEmpty()) {
@@ -33,31 +38,22 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         vm.musicalOffersState.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is MusicalTicketsOffersState.Loading -> {
-
+                is UiState.Success -> {
+                    offersAdapter.setOffers(state.data)
                 }
-
-                is MusicalTicketsOffersState.Success -> {
-                    val offersAdapter = MusicalTicketsOffersAdapter().also {
-                        it.setOffers(state.data.musicalTicketOffers)
-                    }
-                    binding.offersRv.setupRecyclerView(offersAdapter)
+                is UiState.Error -> {
+                    Toast.makeText(context, "Ошибка при загрузке данных", Toast.LENGTH_SHORT).show()
                 }
-
-                is MusicalTicketsOffersState.Error -> {
-
-                }
+                is UiState.Loading -> { }
             }
         }
 
         binding.endDestinationTv.setOnClickListener {
             val startDestinationText = binding.startDestinationEt.text.toString().trim()
             vm.saveDepartureLocation(startDestinationText)
-            val argBundle = bundleOf("START_DESTINATION" to startDestinationText)
-            findNavController().navigate(
-                R.id.action_homeFragment_to_searchTicketsFragment,
-                argBundle
-            )
+            val action = HomeFragmentDirections
+                .actionHomeFragmentToSearchTicketsFragment(startDestinationText)
+            findNavController().navigate(action)
         }
 
         binding.startDestinationEt.addCyrillicTextWatcherFilter()
@@ -73,12 +69,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             )
         )
         adapter = offersAdapter
-    }
-
-    override fun onPause() {
-        super.onPause()
-//        val location = binding?.startDestinationEt?.text?.toString() ?: return
-//        vm.saveDepartureLocation(location)
     }
 
     override fun onDestroyView() {

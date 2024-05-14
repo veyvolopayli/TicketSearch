@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.core.view.children
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.veyvolopayli.presentation.R
@@ -22,6 +23,7 @@ import com.veyvolopayli.presentation.databinding.FragmentSearchTicketsBinding
 class SearchTicketsDialogFragment : BottomSheetDialogFragment(R.layout.fragment_search_tickets) {
 
     private var binding: FragmentSearchTicketsBinding? = null
+    private val args: SearchTicketsDialogFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,20 +35,23 @@ class SearchTicketsDialogFragment : BottomSheetDialogFragment(R.layout.fragment_
         val binding = FragmentSearchTicketsBinding.bind(view)
         this.binding = binding
 
-        val startDestinationArg = arguments?.getString("START_DESTINATION")
-        binding.startDestinationEt.setText(startDestinationArg)
+        binding.startDestinationEt.setText(args.departureLocation)
 
         binding.suggestionsLayout.root.children.forEach {
             it.setOnClickListener { textView ->
-                when(textView) {
+                when (textView) {
                     binding.suggestionsLayout.anywhereTv -> {
                         binding.endDestinationEt.setText(resources.getString(R.string.anywhere))
+                        navigateToCountryChosenSearch()
                     }
+
                     else -> {
-                        val bundle = bundleOf(PlugFragment.NAME_ARG to (textView as? TextView)?.text)
-                        findNavController().navigate(
-                            R.id.action_searchTicketsFragment_to_plugFragment, bundle, null
-                        )
+                        val action = SearchTicketsDialogFragmentDirections
+                            .actionSearchTicketsFragmentToPlugFragment(
+                                (textView as? TextView)?.text.toString()
+                            )
+
+                        findNavController().navigate(action)
                     }
                 }
             }
@@ -57,27 +62,33 @@ class SearchTicketsDialogFragment : BottomSheetDialogFragment(R.layout.fragment_
 
         binding.popularSuggestionsLayout.itemIstanbul.setOnClickListener {
             binding.endDestinationEt.setText(R.string.istanbul)
+            navigateToCountryChosenSearch()
         }
 
         binding.popularSuggestionsLayout.itemSochi.setOnClickListener {
             binding.endDestinationEt.setText(R.string.sochi)
+            navigateToCountryChosenSearch()
         }
 
         binding.popularSuggestionsLayout.itemPhuket.setOnClickListener {
             binding.endDestinationEt.setText(R.string.phuket)
+            navigateToCountryChosenSearch()
         }
 
         binding.endDestinationEt.onRightDrawableClick { it.text.clear() }
 
         binding.endDestinationEt.onDone {
-            val bundle = bundleOf(
-                "START_DESTINATION" to binding.startDestinationEt.text.toString().trim(),
-                "END_DESTINATION" to binding.endDestinationEt.text.toString().trim()
-            )
-            findNavController().navigate(
-                R.id.action_searchTicketsFragment_to_searchCountryChosenFragment, bundle
-            )
+            navigateToCountryChosenSearch()
         }
+    }
+
+    private fun navigateToCountryChosenSearch() {
+        val action = SearchTicketsDialogFragmentDirections
+            .actionSearchTicketsFragmentToSearchCountryChosenFragment(
+                departureLocation = binding?.startDestinationEt?.text.toString().trim(),
+                arrivalLocation = binding?.endDestinationEt?.text.toString().trim()
+            )
+        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {

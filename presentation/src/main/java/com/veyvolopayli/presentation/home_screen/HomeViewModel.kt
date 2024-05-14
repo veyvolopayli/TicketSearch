@@ -5,10 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.veyvolopayli.common.RequestResult
+import com.veyvolopayli.domain.model.musical_ticket_offer.MusicalTicketOffer
 import com.veyvolopayli.domain.model.musical_ticket_offer.MusicalTicketOffers
 import com.veyvolopayli.domain.usecases.FetchMusicalTicketsOffersUseCase
 import com.veyvolopayli.domain.usecases.GetDepartureLocationUseCase
 import com.veyvolopayli.domain.usecases.SaveDepartureLocationUseCase
+import com.veyvolopayli.presentation.common.UiState
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -19,8 +21,8 @@ class HomeViewModel(
     private val getDepartureLocationUseCase: GetDepartureLocationUseCase,
 ) : ViewModel() {
 
-    private val _musicalOffersState = MutableLiveData<MusicalTicketsOffersState>()
-    val musicalOffersState: LiveData<MusicalTicketsOffersState> = _musicalOffersState
+    private val _musicalOffersState = MutableLiveData<UiState<List<MusicalTicketOffer>>>()
+    val musicalOffersState: LiveData<UiState<List<MusicalTicketOffer>>> = _musicalOffersState
 
     private val _savedDepartureLocation = MutableLiveData<String>()
     val savedDepartureLocation: LiveData<String> = _savedDepartureLocation
@@ -43,20 +45,18 @@ class HomeViewModel(
 
     fun fetchMusicalTicketsOffers() {
         fetchMusicalTicketsOffersUseCase().onEach { requestResult ->
-            _musicalOffersState.value = requestResult.toState()
+            _musicalOffersState.value = requestResult.toUiState()
         }.launchIn(viewModelScope)
     }
 
 }
 
-private fun <T> RequestResult<T>.toState() : MusicalTicketsOffersState = when(this) {
-    is RequestResult.Loading -> MusicalTicketsOffersState.Loading
-    is RequestResult.Success -> MusicalTicketsOffersState.Success(data as MusicalTicketOffers)
-    is RequestResult.Failure -> MusicalTicketsOffersState.Error()
-}
-
-sealed class MusicalTicketsOffersState {
-    data object Loading : MusicalTicketsOffersState()
-    class Success(val data: MusicalTicketOffers): MusicalTicketsOffersState()
-    class Error(val data: MusicalTicketOffers? = null): MusicalTicketsOffersState()
+private fun RequestResult<MusicalTicketOffers>.toUiState() : UiState<List<MusicalTicketOffer>> {
+    return when(this) {
+        is RequestResult.Loading -> UiState.Loading()
+        is RequestResult.Success -> UiState.Success(data.musicalTicketOffers)
+        is RequestResult.Failure -> UiState.Error(
+            data = data?.musicalTicketOffers, errorMessage = error.message ?: "Произошла ошибка"
+        )
+    }
 }

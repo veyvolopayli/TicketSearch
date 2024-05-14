@@ -7,13 +7,13 @@ import retrofit2.http.GET
 
 interface TicketsApi {
 
-    @GET("10fbb71b-35d4-4290-9ae8-f787bc43025e")
+    @GET("214a1713-bac0-4853-907c-a1dfc3cd05fd")
     suspend fun fetchMusicalTicketOffers(): MusicalTicketsOffersResponse
 
-    @GET("7199afdb-b45d-4e87-b7a9-58792ecb1390")
+    @GET("7e55bf02-89ff-4847-9eb7-7d83ef884017")
     suspend fun fetchTicketOffers(): TicketsOffersResponse
 
-    @GET("592cb26e-11dc-4c16-9058-8868b7a422b8")
+    @GET("670c3d56-7f03-4237-9e34-d437a9e56ebf")
     suspend fun fetchAllTickets(): TicketsResponse
 
 }

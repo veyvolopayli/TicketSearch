@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.veyvolopayli.presentation.R
 import com.veyvolopayli.presentation.common.SearchData
@@ -25,6 +26,7 @@ class SearchCountryChosenFragment() : Fragment(R.layout.fragment_search_country_
     private val viewModel: SearchCountryChosenViewModel by viewModel()
     private val returningCalendar: Calendar = Calendar.getInstance()
     private val departureCalendar: Calendar = Calendar.getInstance()
+    private val args: SearchCountryChosenFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,33 +34,28 @@ class SearchCountryChosenFragment() : Fragment(R.layout.fragment_search_country_
         val binding = FragmentSearchCountryChosenBinding.bind(view)
         this.binding = binding
 
-        val startDestination = arguments?.getString("START_DESTINATION") ?: ""
-        val endDestination = arguments?.getString("END_DESTINATION") ?: ""
-
         with(binding) {
-            startDestinationEt.setText(startDestination)
-            endDestinationEt.setText(endDestination)
+            startDestinationEt.setText(args.departureLocation)
+            endDestinationEt.setText(args.arrivalLocation)
             returnTicketDateTv.setOnClickListener {
                 returningCalendar.showDatePicker(CalendarType.FROM)
             }
             departureDateTv.setOnClickListener {
                 departureCalendar.showDatePicker(CalendarType.TO)
             }
-            startDestinationEt.onRightDrawableClick {
-                swapDestinations()
-            }
-            endDestinationEt.onRightDrawableClick {
-                it.text.clear()
-            }
+            startDestinationEt.onRightDrawableClick { swapDestinations() }
+            endDestinationEt.onRightDrawableClick { it.text.clear() }
             seeAllTicketsBtn.setOnClickListener {
                 val searchData = SearchData(
                     departureLocation = binding.startDestinationEt.text.toString().trim(),
                     arrivalLocation = binding.endDestinationEt.text.toString().trim(),
                     departureDate = viewModel.topMenuState.value?.departureDate ?: LocalDate.now(),
                 )
-                val action = SearchCountryChosenFragmentDirections.actionSearchCountryChosenFragmentToAllTicketsFragment(searchData)
+                val action = SearchCountryChosenFragmentDirections
+                    .actionSearchCountryChosenFragmentToAllTicketsFragment(searchData)
                 findNavController().navigate(action)
             }
+            iconBack.setOnClickListener { findNavController().navigateUp() }
         }
 
         val offersAdapter = TicketsOffersAdapter()

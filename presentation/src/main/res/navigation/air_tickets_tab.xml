@@ -24,12 +24,15 @@
         <action
             android:id="@+id/action_searchTicketsFragment_to_searchCountryChosenFragment"
             app:destination="@id/searchCountryChosenFragment" />
+        <argument android:name="departure_location" app:argType="string" />
     </dialog>
     <fragment
         android:id="@+id/plugFragment"
         android:name="com.veyvolopayli.presentation.plug_screen.PlugFragment"
         android:label="fragment_plug"
-        tools:layout="@layout/fragment_plug" />
+        tools:layout="@layout/fragment_plug">
+        <argument android:name="plug_name" app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/searchCountryChosenFragment"
         android:name="com.veyvolopayli.presentation.search_country_chosen_screen.SearchCountryChosenFragment"
@@ -39,6 +42,8 @@
             android:id="@+id/action_searchCountryChosenFragment_to_allTicketsFragment"
             app:destination="@id/allTicketsFragment">
         </action>
+        <argument android:name="departure_location" app:argType="string" />
+        <argument android:name="arrival_location" app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/allTicketsFragment"
